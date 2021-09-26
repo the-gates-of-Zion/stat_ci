@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+<!--    <meta name="viewport" coddntent="minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" /> -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Confidence Intervals</title>
+    <link rel="stylesheet" type="text/css" href="./css/SamplingApp.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="./css/Histogram.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="./css/Tips.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="./css/w32.css" media="screen" />
+
+    <script src="./js/jquery-1.10.1.min.js"></script>
+    <script src="./js/Stats.js"></script>
+    <script src="./js/HistogramData.js"></script>
+    <script src="./js/Histogram.js"></script>
+    <script src="./js/CIChart.js"></script>
+    <script src="./js/AnimatedHistogram.js"></script>
+    <script src="./js/Sampling.js"></script>
+    <script src="./js/SamplingApp.js"></script>
+    <script src="./js/StatisticsFunctions.js"></script>
+</head>
+<body class="masterclass">
+<!-- This leftmost column displays the stats -->
+<div class="column" id="displayStatsColumn">
+    <div id="statsDisplay1">
+        <div class="blue row">
+            mean=<div class="blue right" id="mean1">24</div>
+        </div>
+
+        <div class="magenta row">
+            median=<div class="magenta right" id="median1">48</div>
+        </div>
+ 
+       <div class="red row">
+            sd=<div class="red right" id="sd1">48</div><br/>
+        </div>
+
+        <div class="row">
+            skew=<div class="right" id="skew1">48</div><br/>
+        </div>
+
+	<div class="row">
+            kurtosis=<div class="right" id="kurtosis1">48</div><br/>
+        </div>
+
+    </div>
+    <!-- Stats Display for Histogram 2 -->
+    <div id="statsDisplay2">
+        <div class="row">
+            Number of Samples=<div class="right" id="reps2">0</div>
+        </div>
+    </div>   
+</div>
+<!-- The middle column contains interactive charts -->
+<div class="column" id="graphs">
+    <div id="histogram1" class="histogram"></div> <!-- Parent Population -->
+    <div id="histogram2" class="histogram"></div> <!-- Sample Data -->
+    <div id="ciChart" class="histogram mytooltip"mytitle="The confidence intervals are graphically presented in this area. You can also observe the hit rate at the bottom of the graph." ></div> <!--CI Chart -->
+    <div id="displayStat1" class="displayStat">
+	<br/>
+        <table style="width:100%">
+		<col width="25%"/>
+		<col width="25%"/>
+		<col width="25%"/>
+		<col width="25%"/>
+            <tr>
+	        <td align="right"> Number of CI:</td>
+		<td> <span id="numberOfCIs"></span> </td>
+		<td align="right"> Number of True Mean bounded: </td>
+		<td> <span id="ciHit"></span></td>
+	    </tr>
+            <tr>
+	        <td align="right"> Hit rate: </td>
+		<td> <span id="hitRate"></span> </td>
+		<td align="right"></td>
+		<td> <span ></span></td>
+	    </tr>
+        </table>
+    </div>
+</div>
+<!-- The rightmost column, the menu -->
+<div class="column" id="menu">
+    
+    <p style="width:140px;" class="mytooltip" mytitle="You can choose the type of population distribution by clicking the drop down menu. Select the mean and the standard deviation by checking the corresponding button.">
+        Distribution: <br/>
+        <select name="distribution">
+            <option>Normal</option>
+            <option>Binomial</option>
+            <option>Poisson</option>
+
+	</select><br/>
+    
+        Distribution Parameters: <br/>
+	<input name="distPara" type="radio" value='1' checked='checked'><span id="distPara1"></span><br/>
+	<input name="distPara" type="radio" value='2'><span id="distPara2"></span><br/>
+	<input name="distPara" type="radio" value='3'><span id="distPara3"></span><br/>
+	
+    </p>
+<!-- Menu for second histogram -->
+    <br/>
+    <br/>
+    <p style="position:absolute;top:150px;width:140px;" class="mytooltip" mytitle="You can draw samples from population by checking 10, 40 and 100 in order to draw 10, 40 or 100 samples each time. You can also clear the samples by clicking the 'Clear Samples' button.">
+        <button class="w3-button w3-white w3-border w3-border-green w3-round-large" id="resetSamples">Clear Samples</button></br>
+        Generate Samples:<br/>
+        <input name="sampleSize" type="radio" value='10' checked='checked'>10<br/>
+        <input name="sampleSize" type="radio" value='40'>40<br/>
+        <input name="sampleSize" type="radio" value='100'>100<br/>
+        
+    </p>
+<!-- Menu for third histogram -->
+    <br/>
+        <p style="position:absolute;top:300px;width:140px;"  class="mytooltip" mytitle = "Select the confidence level and click 'Generate' to generate the confidence interval.">
+	<button class="w3-button w3-white w3-border w3-border-green w3-round-large" id="generateSample">Generate</button><br/>
+         Confidence Level: <br/>
+         <input name="confidenceLevel" type="radio" value='0.67449'>50%<br/>
+         <input name="confidenceLevel" type="radio" value='1.64485'>90%<br/>
+         <input name="confidenceLevel" type="radio" value='1.95996'> 95% <br/>
+         <input name="confidenceLevel" type="radio" value='2.57583'> 99% <br/>
+    </p>
+<!-- Menu for fourth histogram -->
+    <p style="position:absolute;top:430px;">
+    </p>
+</div>
+<!-- post a smooth normal distribution over stepped one (position controlled by css)-->
+<img src="./image/normdistgraph.png" class="graph" id="normdistgraph">
+
+</body>
+</html>

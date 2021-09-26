@@ -1,0 +1,33 @@
+.histogram {
+    position: relative;
+    height:150px;
+}
+
+
+.histogram_content {
+    position: relative;
+    height: 118px;
+    float: left;
+}
+
+
+.histogram_column {
+    position: relative;
+    float: left;
+    height: 118px;
+}
+
+
+.histogram_bar {
+    position: absolute;
+    background-color: #202020;
+    width: 100%;
+}
+
+
+.chart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index : 1;
+}
